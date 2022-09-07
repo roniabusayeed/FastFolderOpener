@@ -20,22 +20,36 @@
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Row="0" Grid.Column="0"
-                 Margin="0 0 8 0">
-            
+                 Margin="0 0 8 0"
+                 SelectionMode="Single"
+                 x:Name="projectListBox" SelectionChanged="projectListBox_SelectionChanged">
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </ListBox.Resources>
         </ListBox>
         <ListBox Grid.Row="0" Grid.Column="1"
-                 Margin="8 0 0 0">
+                 Margin="8 0 0 0"
+                 SelectionMode="Single"
+                 x:Name="categoriesListBox" SelectionChanged="categoriesListBox_SelectionChanged">
 
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </ListBox.Resources>
         </ListBox>
 
         <Button Grid.Row="0" Grid.Column="3"
                 Height="24" Width="72"
                 x:Name="openButton"
                 Content="Open"
-                Background="White">
+                Background="White" 
+                Click="openButton_Click">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="CornerRadius" Value="3"/>
                 </Style>
             </Button.Resources>
         </Button>
@@ -46,10 +60,11 @@
                 x:Name="editShortcutsButton"
                 HorizontalAlignment="Left"
                 Margin="0 8 0 0"
-                Background="White">
+                Background="White" 
+                Click="editShortcutsButton_Click">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="CornerRadius" Value="3"/>
                 </Style>
             </Button.Resources>
         </Button>
