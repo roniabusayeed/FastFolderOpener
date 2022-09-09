@@ -12,5 +12,7 @@ namespace FastFolderOpener
         public const string COULD_NOT_OPEN_FILE_MESSAGE = "Couldn't open file";
         public const string COULD_NOT_OPEN_DIRECTORY_MESSAGE = "Coudn't open folder specified";
         public const string PROJECT_OR_CATEGORY_NOT_SELECTED_MESSAGE = "Please select a project and a category first";
+        public const string APPLICATION_CONFIG_FILENAME = "configuration.json";
+        public const string SAVING_CONFIGURATION_FAILED = "Couldn't save configurations";
     }
 }

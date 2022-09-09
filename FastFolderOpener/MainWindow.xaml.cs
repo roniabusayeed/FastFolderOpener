@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace FastFolderOpener
 {
@@ -21,13 +23,20 @@ namespace FastFolderOpener
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string databaseFilePath = Constants.NO_DATABASE_ADDED;
+        private string databaseFilePath;
         Dictionary<string, Dictionary<string, string>> database;
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             Title = Constants.APPLICATION_TITLE;
-            databaseTextBlock.Text = databaseFilePath;
+            string path = await Config.GetInstance().GetAsync("databaseFilePath") ?? string.Empty;
+            setDatabaseFilePath(path);
+            await loadAync();
         }
 
         private void projectListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,7 +81,11 @@ namespace FastFolderOpener
 
         private async void reloadButton_Click(object sender, RoutedEventArgs e)
         {
-            await loadAync();
+            if (!await loadAync())
+            {
+                MessageBox.Show(Constants.DATABASE_LOADING_ERROR_MESSAGE,
+                    Constants.APPLICATION_TITLE);
+            }
         }
 
         private void setDatabaseFilePath(string path)
@@ -88,12 +101,17 @@ namespace FastFolderOpener
             using var openFileDialog = new System.Windows.Forms.OpenFileDialog();
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                setDatabaseFilePath(openFileDialog.FileName);
-                await loadAync();
+                string path = openFileDialog.FileName;
+                setDatabaseFilePath(path);
+                if (!await loadAync())
+                {
+                    MessageBox.Show(Constants.DATABASE_LOADING_ERROR_MESSAGE,
+                    Constants.APPLICATION_TITLE);
+                }
+                await Config.GetInstance().AddAsync("databaseFilePath", path);
             }
         }
-
-        private async Task loadAync()
+        private async Task<bool> loadAync()
         {
             projectListBox.Items.Clear();
             categoriesListBox.Items.Clear();
@@ -105,9 +123,7 @@ namespace FastFolderOpener
 
             if (database is null)
             {
-                MessageBox.Show(Constants.DATABASE_LOADING_ERROR_MESSAGE,
-                    Constants.APPLICATION_TITLE);
-                return;
+                return false;
             }
 
             // Update projectsListBox.
@@ -115,6 +131,7 @@ namespace FastFolderOpener
             {
                 projectListBox.Items.Add(project);
             }
+            return true;
         }
     }
 }
