@@ -52,6 +52,19 @@ namespace FastFolderOpener
                 }
             }
         }
+        private void categoriesListBox_Selected(object sender, RoutedEventArgs e)
+        {
+            string project = projectListBox.SelectedItem as string;
+            string category = categoriesListBox.SelectedItem as string;
+            if (project != null && category != null)
+            {
+                folderPathViewTextBox.Text = database[project][category];
+            }
+            else
+            {
+                folderPathViewTextBox.Text = string.Empty;
+            }
+        }
 
         private void openButton_Click(object sender, RoutedEventArgs e)
         {
