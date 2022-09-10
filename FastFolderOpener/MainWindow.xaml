@@ -32,11 +32,10 @@
         </ListBox>
         <ListBox Grid.Row="0" Grid.Column="1"
                  Margin="8 0 0 0"
-                 SelectionMode="Single"
-                 x:Name="categoriesListBox" 
-                 SelectionChanged="categoriesListBox_Selected"
+                 SelectionMode="Single" 
+                 SelectionChanged="categoriesListBox_SelecttionChanged" 
+                 x:Name="categoriesListBox"
                  >
-
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="3"/>
@@ -47,18 +46,6 @@
                     Orientation="Vertical"
                     VerticalAlignment="Center"
                     Margin="8 0 0 0">
-            <TextBox 
-                x:Name="folderPathViewTextBox"
-                VerticalContentAlignment="Center"
-                HorizontalScrollBarVisibility="Auto"
-                Padding="4 0 4 0"
-                >
-                <TextBox.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="3"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
             <Button
                 Height="24" Width="72"
                 x:Name="openButton"
@@ -74,7 +61,21 @@
             </Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" 
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                x:Name="folderPathViewTextBox"
+                VerticalContentAlignment="Center"
+                HorizontalScrollBarVisibility="Auto"
+                Padding="4 0 4 0"
+                Margin="0 8 0 0"
+                >
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" 
                     Grid.ColumnSpan="3"
                     Orientation="Horizontal"
                     Margin="0 8 0 0 ">

@@ -52,7 +52,7 @@ namespace FastFolderOpener
                 }
             }
         }
-        private void categoriesListBox_Selected(object sender, RoutedEventArgs e)
+        private void categoriesListBox_SelecttionChanged(object sender, RoutedEventArgs e)
         {
             string project = projectListBox.SelectedItem as string;
             string category = categoriesListBox.SelectedItem as string;
@@ -74,6 +74,7 @@ namespace FastFolderOpener
             {
                 try
                 {
+                    Button button = new Button();
                     Process.Start("explorer.exe", database[project][category]);
                 } catch
                 {
@@ -146,5 +147,7 @@ namespace FastFolderOpener
             }
             return true;
         }
+
+       
     }
 }
