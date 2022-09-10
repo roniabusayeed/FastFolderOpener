@@ -47,7 +47,7 @@
                     VerticalAlignment="Center"
                     Margin="8 0 0 0">
             <Button
-                Height="24" Width="72"
+                Height="48" Width="144"
                 x:Name="openButton"
                 Content="Open"
                 Background="White" 
