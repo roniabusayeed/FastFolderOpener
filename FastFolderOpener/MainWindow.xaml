@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FastFolderOpener"
         mc:Ignorable="d"
-        Height="450" Width="800"
-        Background="#e0e0e0">
-    <Grid Margin="20">
+        
+        
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF" 
+        fw:AcrylicWindow.Enabled="True"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        
+        Height="450" Width="800">
+    <Grid 
+        Margin="20"
+        Background="#01e0e0e0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
@@ -20,6 +28,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Row="0" Grid.Column="0"
+                 Background="#A0FFFFFF"
                  Margin="0 0 8 0"
                  SelectionMode="Single"
                  x:Name="projectListBox" 
@@ -31,6 +40,7 @@
             </ListBox.Resources>
         </ListBox>
         <ListBox Grid.Row="0" Grid.Column="1"
+                 Background="#A0FFFFFF"
                  Margin="8 0 0 0"
                  SelectionMode="Single" 
                  SelectionChanged="categoriesListBox_SelecttionChanged" 
@@ -62,7 +72,8 @@
         </StackPanel>
 
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                x:Name="folderPathViewTextBox"
+                Background="#A0FFFFFF"
+                 x:Name="folderPathViewTextBox"
                 VerticalContentAlignment="Center"
                 HorizontalScrollBarVisibility="Auto"
                 Padding="4 0 4 0"
